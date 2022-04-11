@@ -1,7 +1,10 @@
 <template>
   <div class="col-lg-3 col-sm-6 col-xs-12 my-3">
     <div class="card shadow-sm h-100">
-      <PokemonCardContent :url="baseContent.url" :name="baseContent.name"/>
+      <PokemonCardContent
+        :url="baseContent.url"
+        :name="baseContent.name"
+      />
     </div>
   </div>
 </template>
@@ -40,6 +43,7 @@ export default defineComponent({
     const isDataStored = () => store.getters[types.GET_IS_DATA_STORED];
     // retreive the list of pokemons
     const getContent = async (): Promise<void> => {
+      store.dispatch(types.SET_START_LOADING); // Start loading
       try {
         await axios
           .get(baseContent.value?.url)

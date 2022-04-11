@@ -63,6 +63,7 @@ export default defineComponent({
       }
     };
     onBeforeMount(() => {
+      store.dispatch(types.SET_START_LOADING); // Start loading
       getList();
     });
     return {

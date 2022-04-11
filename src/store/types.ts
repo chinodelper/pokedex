@@ -19,6 +19,8 @@ export const GET_PREV_PAGE = 'pagination/GET_PREV_PAGE';
 export const GET_NEXT_PAGE = 'pagination/GET_NEXT_PAGE';
 
 // Error types
+export const SET_START_LOADING = 'loading/SET_START_LOADING';
+export const MUTATE_SET_START_LOADING = 'loading/MUTATE_SET_START_LOADING';
 export const GET_IS_LOADING = 'loading/GET_IS_LOADING';
 export const SET_ERRORS = 'errors/SET_ERRORS';
 export const MUTATE_SET_ERRORS = 'errors/MUTATE_SET_ERRORS';

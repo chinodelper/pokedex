@@ -6,19 +6,19 @@ type Pokemon = {
   url: string
 }
 
-type PokemonDetails = {
+type PokemonContent = {
   types: Pokemon[],
   sprites: []
 }
 
-type pokemonSpeciesDetails = {
+type pokemonSpeciesContent = {
   flavorTextEntries: [],
 }
 
 interface IStatePokemon {
   pokemonList: Pokemon[],
-  pokemonListDetails: PokemonDetails[],
-  pokemonSpeciesDetails: pokemonSpeciesDetails[],
+  pokemonListContent: PokemonContent[],
+  pokemonSpeciesContent: pokemonSpeciesContent[],
   nextPage: string,
   prevPage: string,
   errors: Array<string>,
@@ -40,8 +40,8 @@ interface IErrors {
 export default createStore({
   state: {
     pokemonList: [],
-    pokemonListDetails: [],
-    pokemonSpeciesDetails: [],
+    pokemonListContent: [],
+    pokemonSpeciesContent: [],
     nextPage: '',
     prevPage: '',
     loading: null,
@@ -53,10 +53,13 @@ export default createStore({
     [types.GET_IS_LOADING]: (state: IStatePokemon) => state.loading,
     [types.GET_IS_LOADING]: (state: IStatePokemon) => state.loading,
     [types.GET_POKEMON]: (state: IStatePokemon) => state.pokemonList,
-    [types.GET_POKEMON_SPECIES]: (state: IStatePokemon) => state.pokemonSpeciesDetails,
-    [types.GET_IS_DATA_STORED]: (state: IStatePokemon) => state.pokemonListDetails.length === 0,
+    [types.GET_POKEMON_SPECIES]: (state: IStatePokemon) => state.pokemonSpeciesContent,
+    [types.GET_IS_DATA_STORED]: (state: IStatePokemon) => state.pokemonListContent.length === 0,
     [types.GET_POKEMON_CONTENT]:
-      (state: IStatePokemon) => (id: number) => state.pokemonListDetails[id - 1],
+      (state: IStatePokemon) => (id: number) => {
+        console.log('GET CONTENT: ', id);
+        return state.pokemonListContent[id - 1];
+      },
   },
   mutations: {
     [types.MUTATE_SET_POKEMON]: (state: IStatePokemon, payload: []) => {
@@ -71,13 +74,16 @@ export default createStore({
       state.nextPage = payload; // save pokemon list
       state.loading = false; // Loading finished
     },
-    [types.MUTATE_SET_POKEMON_CONTENT]: (state: IStatePokemon, payload: PokemonDetails) => {
-      state.pokemonListDetails.push(payload); // save pokemon list details
+    [types.MUTATE_SET_POKEMON_CONTENT]: (state: IStatePokemon, payload: PokemonContent) => {
+      state.pokemonListContent.push(payload); // save pokemon list details
       state.loading = false; // Loading finished
     },
     [types.MUTATE_SET_POKEMON_SPECIES]: (state: IStatePokemon, payload: []) => {
-      state.pokemonSpeciesDetails = payload; // save pokemon species details
+      state.pokemonSpeciesContent = payload; // save pokemon species details
       state.loading = false; // Loading finished
+    },
+    [types.MUTATE_SET_START_LOADING]: (state: IStatePokemon) => {
+      state.loading = true; // Loading finished
     },
     [types.MUTATE_SET_ERRORS]: (state:IErrors, payload:ErrorLog) => {
       state.errors.push(payload);
@@ -87,30 +93,31 @@ export default createStore({
     },
   },
   actions: {
-    [types.SET_POKEMON]: ({ commit, state }:
+    [types.SET_POKEMON]: ({ commit }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
-      state.loading = true; // Start Loading
       commit(types.MUTATE_SET_POKEMON, payload);
     },
-    [types.SET_POKEMON_CONTENT]: ({ commit, state }:
+    [types.SET_POKEMON_CONTENT]: ({ commit }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
-      state.loading = true; // Start Loading
       commit(types.MUTATE_SET_POKEMON_CONTENT, payload);
     },
-    [types.SET_POKEMON_SPECIES]: ({ commit, state }:
+    [types.SET_POKEMON_SPECIES]: ({ commit }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
-      state.loading = true; // Start Loading
       commit(types.MUTATE_SET_POKEMON_SPECIES, payload);
     },
     [types.SET_NEXT_PAGE]: ({ commit, state }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
-      state.loading = true; // Start Loading
+      state.pokemonListContent = []; // reset list details
       commit(types.MUTATE_SET_NEXT_PAGE, payload);
     },
     [types.SET_PREV_PAGE]: ({ commit, state }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
-      state.loading = true; // Start Loading
+      state.pokemonListContent = []; // reset list details
       commit(types.MUTATE_SET_PREV_PAGE, payload);
+    },
+    [types.SET_START_LOADING]: ({ commit }:
+      { commit: Commit }) => {
+      commit(types.MUTATE_SET_START_LOADING);
     },
     [types.SET_ERRORS]: async (
       { commit }:{ commit: Commit },

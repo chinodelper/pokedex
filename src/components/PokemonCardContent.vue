@@ -39,10 +39,11 @@ export default defineComponent({
     const { url, name } = toRefs(props);
     const store = useStore();
     const getPokemonId = url.value?.split('/').slice(-2)[0];
+    const pokemon = computed(() => store.getters[types.GET_POKEMON_CONTENT](getPokemonId));
     return {
       getPokemonName: name,
       getPokemonId,
-      pokemon: computed(() => store.getters[types.GET_POKEMON_CONTENT](getPokemonId)),
+      pokemon,
     };
   },
 });

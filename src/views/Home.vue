@@ -39,7 +39,7 @@ export default defineComponent({
     const prevUrl = store.getters[types.GET_PREV_PAGE];
     const nextUrl = store.getters[types.GET_NEXT_PAGE];
     const updateList = async (url: string): Promise<void> => {
-      console.log('URL: ', url);
+      store.dispatch(types.SET_START_LOADING); // Start loading
       try {
         await axios
           .get(url)
