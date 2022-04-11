@@ -1,16 +1,30 @@
 <template>
-  <div id="nav">
+  <div id="nav" v-if="!isLoading">
     <router-link to="/">Pokédex</router-link> |
     <router-link to="/addNew">Add Pokemon</router-link>
   </div>
-  <router-view/>
+  <div class="container">
+    <div class="row">
+      <div class="text-center" v-if="isLoading">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <router-view v-if="!isLoading"/>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, inject } from 'vue';
+import {
+  defineComponent,
+  onBeforeMount,
+  inject,
+  computed,
+} from 'vue';
 import { useStore } from 'vuex';
 import * as types from '@/store/types';
-import POKEAPI from './api';
+import POKEAPI from '@/api';
 
 export default defineComponent({
   name: 'App',
@@ -32,24 +46,28 @@ export default defineComponent({
         await axios
           .get(POKEAPI.getAll)
           .then((response: { data: IResponsePokemon }) => {
-            console.log(response.data);
             store.dispatch(types.SET_POKEMON, response.data.results);
+            store.dispatch(types.SET_NEXT_PAGE, response.data.next);
+            store.dispatch(types.SET_PREV_PAGE, response.data.previous);
           });
       } catch (error) {
         console.log(error);
-        // const errorLog = {
-        //   error,
-        //   label: 'Error retrieving the pokemon list',
-        //   type: types.SET_POKEMON,
-        //   visible: true,
-        // };
-        // // Save error in the store
-        // store.dispatch(types.MUTATE_SET_ERRORS, errorLog);
+        const errorLog = {
+          error,
+          label: 'Error retrieving the pokemon list',
+          type: types.SET_POKEMON,
+          visible: true,
+        };
+        // Save error in the store
+        store.dispatch(types.SET_ERRORS, errorLog);
       }
     };
-    onMounted(() => {
+    onBeforeMount(() => {
       getList();
     });
+    return {
+      isLoading: computed(() => store.getters[types.GET_IS_LOADING]),
+    };
   },
 });
 </script>

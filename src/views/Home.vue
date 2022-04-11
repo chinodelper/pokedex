@@ -1,18 +1,72 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <pokemon-card
+    v-for="pokemon in pokemonList"
+    :key="pokemon.name"
+    :baseContent="pokemon"
+  />
+  <a href="#" @click="prev">prev</a>
+  <a href="#" @click="next">next</a>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import {
+  defineComponent,
+  computed,
+  inject,
+} from 'vue';
+import PokemonCard from '@/components/PokemonCard.vue';
+import { useStore } from 'vuex';
+import * as types from '@/store/types';
 
 export default defineComponent({
   name: 'Home',
   components: {
-    HelloWorld,
+    PokemonCard,
+  },
+  setup() {
+    type Pokemon = {
+      name: string,
+      url: string
+    }
+    interface IResponsePokemon {
+      count: number;
+      next: string;
+      previous: string;
+      results: Pokemon[];
+    }
+    const store = useStore();
+    const axios: any = inject('$http'); // inject axios
+    const prevUrl = store.getters[types.GET_PREV_PAGE];
+    const nextUrl = store.getters[types.GET_NEXT_PAGE];
+    const updateList = async (url: string): Promise<void> => {
+      console.log('URL: ', url);
+      try {
+        await axios
+          .get(url)
+          .then((response: { data: IResponsePokemon }) => {
+            store.dispatch(types.SET_POKEMON, response.data.results);
+            store.dispatch(types.SET_NEXT_PAGE, response.data.next);
+            store.dispatch(types.SET_PREV_PAGE, response.data.previous);
+          });
+      } catch (error) {
+        console.log(error);
+        const errorLog = {
+          error,
+          label: 'Error updating the pokemon list',
+          type: types.SET_POKEMON,
+          visible: true,
+        };
+        // Save error in the store
+        store.dispatch(types.SET_ERRORS, errorLog);
+      }
+    };
+    const prev = () => updateList(prevUrl);
+    const next = () => updateList(nextUrl);
+    return {
+      pokemonList: computed(() => store.getters[types.GET_POKEMON]),
+      prev,
+      next,
+    };
   },
 });
 </script>

@@ -12,6 +12,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Add New',
     component: () => import(/* webpackChunkName: "new" */ '../views/AddNew.vue'),
   },
+  {
+    path: '/:pokemon',
+    name: 'pokemon',
+    component: () => import(/* webpackChunkName: "new" */ '../views/Pokemon.vue'),
+  },
 ];
 
 const router = createRouter({

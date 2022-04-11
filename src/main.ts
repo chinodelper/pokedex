@@ -5,6 +5,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
+
 // Set base URL
 axios.defaults.baseURL = process.env.VUE_APP_POKEAPI_URI;
 
