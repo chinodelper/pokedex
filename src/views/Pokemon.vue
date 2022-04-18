@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-3">
+  <div class="card my-3">
     <div class="row g-0">
       <PokemonCardFullContent />
     </div>

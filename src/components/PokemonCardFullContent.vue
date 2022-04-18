@@ -13,11 +13,7 @@
       </p>
       <p class="card-text">Height: {{ pokemon?.height / 10 }}mts.</p>
       <p class="card-text">Weight: {{ pokemon?.weight / 10 }}kg.</p>
-      <span
-        class="badge rounded-pill bg-primary mx-1"
-        v-for="types in pokemon?.types" :key="types?.type">
-          {{ types.type.name }}
-      </span>
+      <PokemonTypes :typesList="pokemon?.types" />
     </div>
   </div>
 </template>
@@ -32,9 +28,13 @@ import {
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import * as types from '@/store/types';
+import PokemonTypes from '@/components/PokemonCardContentType.vue';
 
 export default defineComponent({
   name: 'Pokemon',
+  components: {
+    PokemonTypes,
+  },
   setup() {
     const route = useRoute();
     const { id } = route.params;

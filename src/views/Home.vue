@@ -4,8 +4,16 @@
     :key="pokemon.name"
     :baseContent="pokemon"
   />
-  <a href="#" @click.stop.prevent="prev">prev</a>
-  <a href="#" @click.stop.prevent="next">next</a>
+  <nav aria-label="Page navigation example" class="my-5">
+    <ul class="pagination justify-content-center pagination-lg">
+      <li class="page-item">
+        <a class="page-link" href="#" @click.stop.prevent="prev">Previous</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#" @click.stop.prevent="next">Next</a>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script lang="ts">

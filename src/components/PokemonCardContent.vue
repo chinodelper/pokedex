@@ -11,11 +11,7 @@
       <h4 class="card-title">
         {{ getPokemonName }}
       </h4>
-      <span
-        class="badge rounded-pill bg-primary mx-1"
-        v-for="types in pokemon?.types" :key="types?.type">
-          {{ types.type.name }}
-      </span>
+      <PokemonTypes :typesList="pokemon?.types" />
     </div>
   </div>
 </template>
@@ -28,9 +24,13 @@ import {
 } from 'vue';
 import { useStore } from 'vuex';
 import * as types from '@/store/types';
+import PokemonTypes from '@/components/PokemonCardContentType.vue';
 
 export default defineComponent({
   name: 'PokemonCardContent',
+  components: {
+    PokemonTypes,
+  },
   props: {
     url: String,
     name: String,
@@ -50,5 +50,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-
+  .card-title {
+    text-transform: capitalize;
+  }
 </style>
