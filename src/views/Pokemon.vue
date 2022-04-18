@@ -1,6 +1,6 @@
 <template>
   <div class="card my-3">
-    <div class="row g-0">
+    <div class="row g-0 align-items-center">
       <PokemonCardFullContent />
     </div>
   </div>

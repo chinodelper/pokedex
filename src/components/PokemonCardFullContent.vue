@@ -7,12 +7,23 @@
   </div>
   <div class="col-md-8">
     <div class="card-body">
-      <h5 class="card-title">{{ pokemon?.name }} <span>N.º {{ pokemon?.id }}</span></h5>
+      <h2 class="card-title">
+        {{ pokemon?.name }}
+        <span class="badge bg-secondary">Nº{{ pokemon?.id }}</span>
+      </h2>
       <p class="card-text">
         {{ getFlavorTxt(species?.flavor_text_entries) }}
       </p>
-      <p class="card-text">Height: {{ pokemon?.height / 10 }}mts.</p>
-      <p class="card-text">Weight: {{ pokemon?.weight / 10 }}kg.</p>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Height
+          <span class="badge bg-primary rounded-pill">{{ pokemon?.height / 10 }}mts.</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Weight
+          <span class="badge bg-primary rounded-pill">{{ pokemon?.weight / 10 }}kg.</span>
+        </li>
+      </ul>
       <PokemonTypes :typesList="pokemon?.types" />
     </div>
   </div>

@@ -57,10 +57,7 @@ export default createStore({
     [types.GET_POKEMON_SPECIES]: (state: IStatePokemon) => state.pokemonSpeciesContent,
     [types.GET_IS_DATA_STORED]: (state: IStatePokemon) => state.pokemonListContent.length === 0,
     [types.GET_POKEMON_CONTENT]:
-      (state: IStatePokemon) => (id: number) => {
-        console.log('GET CONTENT: ', id, state.pokemonListContent);
-        return state.pokemonListContent[id - 1];
-      },
+      (state: IStatePokemon) => (id: number) => state.pokemonListContent[id - 1],
   },
   mutations: {
     [types.MUTATE_SET_POKEMON]: (state: IStatePokemon, payload: []) => {

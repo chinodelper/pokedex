@@ -9,24 +9,26 @@
       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     </div>
 
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="fireCheckbox">
-      <label class="form-check-label" for="fireCheckbox">
-        Fire
+    <div class="list-group">
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        First checkbox
       </label>
-    </div>
-
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="bugCheckbox">
-      <label class="form-check-label" for="bugCheckbox">
-        Bug
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        Second checkbox
       </label>
-    </div>
-
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="waterCheckbox">
-      <label class="form-check-label" for="waterCheckbox">
-        Water
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        Third checkbox
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        Fourth checkbox
+      </label>
+      <label class="list-group-item">
+        <input class="form-check-input me-1" type="checkbox" value="">
+        Fifth checkbox
       </label>
     </div>
 
