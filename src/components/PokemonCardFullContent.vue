@@ -24,6 +24,7 @@
           <span class="badge bg-primary rounded-pill">{{ pokemon?.weight / 10 }}kg.</span>
         </li>
       </ul>
+      <h5>Type</h5>
       <PokemonTypes :typesList="pokemon?.types" />
     </div>
   </div>

@@ -7,6 +7,7 @@ type Pokemon = {
 }
 
 type PokemonContent = {
+  id: number,
   types: Pokemon[],
   sprites: []
 }
@@ -73,7 +74,8 @@ export default createStore({
       state.loading = false; // Loading finished
     },
     [types.MUTATE_SET_POKEMON_CONTENT]: (state: IStatePokemon, payload: PokemonContent) => {
-      state.pokemonListContent.push(payload); // save pokemon list details
+      state.pokemonListContent[payload.id - 1] = payload; // save pokemon list details
+      // state.pokemonListContent.push(payload); // save pokemon list details
       state.loading = false; // Loading finished
     },
     [types.MUTATE_SET_POKEMON_SPECIES]: (state: IStatePokemon, payload: []) => {

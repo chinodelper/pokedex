@@ -2,13 +2,16 @@
   <span
     class="badge rounded-pill mx-1"
     :class="[
-      { 'bg-danger' : types.type.name ===  'poison'},
-      { 'bg-success' : types.type.name ===  'grass'},
-      { 'bg-warning text-dark' : types.type.name ===  'fire'},
-      { 'bg-info' : types.type.name ===  'water'},
-      { 'bg-dark' : types.type.name ===  'bug'},
-      { 'bg-secondary' : types.type.name ===  'normal'},
-      { 'bg-primary' : types.type.name ===  'flying'},
+      { 'bg-danger' : types.type.name ===  'poison' || types.type.name === 'steel'},
+      { 'bg-success' : types.type.name ===  'grass' || types.type.name === 'psychic'},
+      { 'bg-warning text-dark' : types.type.name ===  'fire' || types.type.name ===  'electric'},
+      { 'bg-info' : types.type.name ===  'water' || types.type.name === 'ice' },
+      { 'bg-dark' : types.type.name ===  'bug' || types.type.name ===  'ground'},
+      { 'bg-secondary' : types.type.name ===  'normal'
+        || types.type.name === 'fighting'
+        || types.type.name === 'rock'
+        || types.type.name === 'ghost' },
+      { 'bg-primary' : types.type.name ===  'flying' || types.type.name === 'fairy'},
     ]"
     v-for="types in list" :key="types?.type">
       {{ types.type.name }}
