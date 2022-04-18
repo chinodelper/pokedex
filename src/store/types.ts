@@ -1,5 +1,6 @@
 // Pokemon types
 export const GET_POKEMON = 'pokemon/GET_POKEMON';
+export const GET_POKEMON_LIST_CONTENT = 'pokemon/GET_POKEMON_LIST_CONTENT';
 export const GET_POKEMON_SPECIES = 'pokemon/GET_POKEMON_SPECIES';
 export const GET_IS_DATA_STORED = 'pokemon/GET_IS_DATA_STORED';
 export const GET_POKEMON_CONTENT = 'pokemon/GET_POKEMON_CONTENT';

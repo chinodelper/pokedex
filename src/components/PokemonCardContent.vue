@@ -5,11 +5,11 @@
       <img
         class="card-img-top"
         :src="pokemon?.sprites.other.home.front_default"
-        :alt="pokemon?.name">
+        :alt="getPokemonName">
     </router-link>
     <div class="card-body">
       <h4 class="card-title">
-        {{ pokemon?.name }}
+        {{ getPokemonName }}
       </h4>
       <span
         class="badge rounded-pill bg-primary mx-1"
@@ -36,9 +36,9 @@ export default defineComponent({
     name: String,
   },
   setup(props) {
-    const { url, name } = toRefs(props);
     const store = useStore();
-    const getPokemonId = url.value?.split('/').slice(-2)[0];
+    const { url, name } = toRefs(props);
+    const getPokemonId = url.value?.split('/').slice(-2)[0] || 0;
     const pokemon = computed(() => store.getters[types.GET_POKEMON_CONTENT](getPokemonId));
     return {
       getPokemonName: name,

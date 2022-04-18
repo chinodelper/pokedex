@@ -53,11 +53,12 @@ export default createStore({
     [types.GET_IS_LOADING]: (state: IStatePokemon) => state.loading,
     [types.GET_IS_LOADING]: (state: IStatePokemon) => state.loading,
     [types.GET_POKEMON]: (state: IStatePokemon) => state.pokemonList,
+    [types.GET_POKEMON_LIST_CONTENT]: (state: IStatePokemon) => state.pokemonListContent,
     [types.GET_POKEMON_SPECIES]: (state: IStatePokemon) => state.pokemonSpeciesContent,
     [types.GET_IS_DATA_STORED]: (state: IStatePokemon) => state.pokemonListContent.length === 0,
     [types.GET_POKEMON_CONTENT]:
       (state: IStatePokemon) => (id: number) => {
-        console.log('GET CONTENT: ', id);
+        console.log('GET CONTENT: ', id, state.pokemonListContent);
         return state.pokemonListContent[id - 1];
       },
   },
@@ -107,12 +108,12 @@ export default createStore({
     },
     [types.SET_NEXT_PAGE]: ({ commit, state }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
-      state.pokemonListContent = []; // reset list details
+      state.pokemonListContent = []; // reset list content
       commit(types.MUTATE_SET_NEXT_PAGE, payload);
     },
     [types.SET_PREV_PAGE]: ({ commit, state }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
-      state.pokemonListContent = []; // reset list details
+      state.pokemonListContent = []; // reset list content
       commit(types.MUTATE_SET_PREV_PAGE, payload);
     },
     [types.SET_START_LOADING]: ({ commit }:

@@ -72,6 +72,11 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+  .card {
+    &:hover {
+      box-shadow: 0 0.5rem .5rem rgba(0,0,0,.075)!important;
+      border: 1px solid grey;
+    }
+  }
 </style>

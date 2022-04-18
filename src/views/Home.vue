@@ -4,8 +4,8 @@
     :key="pokemon.name"
     :baseContent="pokemon"
   />
-  <a href="#" @click="prev">prev</a>
-  <a href="#" @click="next">next</a>
+  <a href="#" @click.stop.prevent="prev">prev</a>
+  <a href="#" @click.stop.prevent="next">next</a>
 </template>
 
 <script lang="ts">
