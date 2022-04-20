@@ -65,6 +65,21 @@ export default createStore({
       state.pokemonList = payload; // save pokemon list
       state.loading = false; // Loading finished
     },
+    [types.MUTATE_SET_ADD_NEW_POKEMON]: (state: IStatePokemon,
+      payload: {
+        id: number,
+        name: string,
+        image: string,
+        description: string,
+        type: string[]
+      }) => {
+      const item = {
+        name: payload.name,
+        url: `https://pokeapi.co/api/v2/pokemon/${payload.id}/`,
+      };
+      state.pokemonList.push(item); // save pokemon list
+      state.loading = false; // Loading finished
+    },
     [types.MUTATE_SET_PREV_PAGE]: (state: IStatePokemon, payload: string) => {
       state.prevPage = payload; // save pokemon list
       state.loading = false; // Loading finished
@@ -93,6 +108,10 @@ export default createStore({
     },
   },
   actions: {
+    [types.SET_ADD_NEW_POKEMON]: ({ commit }:
+      { commit: Commit, state: IStatePokemon }, payload: []) => {
+      commit(types.MUTATE_SET_ADD_NEW_POKEMON, payload);
+    },
     [types.SET_POKEMON]: ({ commit }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
       commit(types.MUTATE_SET_POKEMON, payload);
