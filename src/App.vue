@@ -22,7 +22,7 @@
   </nav>
   <div class="container">
     <div class="row">
-      <div class="text-center" v-if="isLoading">
+      <div class="text-center my-5" v-if="isLoading">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
@@ -57,7 +57,7 @@ export default defineComponent({
       results: Pokemon[];
     }
     const axios: any = inject('$http'); // inject axios
-    const store = useStore();
+    const store = useStore(); // inject vuex
     const getList = async (): Promise<void> => {
       try {
         await axios
