@@ -3,8 +3,10 @@
     <h3 class="mb-5">Write new data for a new Pokemon</h3>
     <div class="row">
       <div class="col">
-        <div class="mb-3">
-          <label for="id" class="form-label">Id</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text">
+            <label for="id">Id</label>
+          </span>
           <input
             id="name"
             v-model="newPkemon.id"
@@ -13,8 +15,10 @@
             aria-describedby="id" />
         </div>
 
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text">
+            <label for="name">Name</label>
+          </span>
           <input
             id="name"
             v-model="newPkemon.name"
@@ -23,8 +27,39 @@
             aria-describedby="name" />
         </div>
 
-        <div class="mb-3">
-          <label for="image" class="form-label">Image URL</label>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text">
+                <label for="height">Height</label>
+              </span>
+              <input
+                id="height"
+                v-model="newPkemon.height"
+                type="text"
+                class="form-control"
+                aria-describedby="height" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text">
+                <label for="weight">Weight</label>
+              </span>
+              <input
+                id="height"
+                v-model="newPkemon.weight"
+                type="text"
+                class="form-control"
+                aria-describedby="weight" />
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">
+            <label for="image">Image URL</label>
+          </span>
           <input
             id="image"
             v-model="newPkemon.sprites"
@@ -33,8 +68,10 @@
             aria-describedby="name" />
         </div>
 
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text">
+            <label for="description">Description</label>
+          </span>
           <textarea
             id="description"
             v-model="newPkemon.description"
@@ -43,7 +80,6 @@
         </div>
       </div>
       <div class="col">
-        <label for="types" class="form-label">Type/s</label>
         <div class="list-group">
           <label
             v-for="type in typesList"
@@ -94,6 +130,8 @@ export default defineComponent({
       newPkemon: {
         id: undefined,
         name: '',
+        height: 0,
+        weight: 0,
         description: '',
         sprites: '',
         types: [],
