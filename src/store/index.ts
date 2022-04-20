@@ -8,8 +8,8 @@ type Pokemon = {
 
 type PokemonContent = {
   id: number,
-  types: Pokemon[],
-  sprites: []
+  types: any,
+  sprites: any
 }
 
 type pokemonSpeciesContent = {
@@ -58,7 +58,12 @@ export default createStore({
     [types.GET_POKEMON_SPECIES]: (state: IStatePokemon) => state.pokemonSpeciesContent,
     [types.GET_IS_DATA_STORED]: (state: IStatePokemon) => state.pokemonListContent.length === 0,
     [types.GET_POKEMON_CONTENT]:
-      (state: IStatePokemon) => (id: number) => state.pokemonListContent[id - 1],
+      (state: IStatePokemon) => (id: number) => {
+        const idInt = Number(id);
+        const item = state.pokemonListContent
+          .find((el) => el.id === idInt);
+        return item;
+      },
   },
   mutations: {
     [types.MUTATE_SET_POKEMON]: (state: IStatePokemon, payload: []) => {
@@ -69,15 +74,33 @@ export default createStore({
       payload: {
         id: number,
         name: string,
-        image: string,
+        sprites: string,
         description: string,
-        type: string[]
+        types: any
       }) => {
       const item = {
         name: payload.name,
         url: `https://pokeapi.co/api/v2/pokemon/${payload.id}/`,
       };
+
+      // Build the new structure to add payload
+      const itemTypes: any = [];
+      payload.types.forEach((element: string) => itemTypes.push({ type: { name: element } }));
+      const itemContent = {
+        id: payload.id,
+        types: itemTypes,
+        sprites: {
+          other: {
+            home: {
+              front_default: payload.sprites,
+            },
+          },
+        },
+      };
+
+      // Set new data into current store
       state.pokemonList.push(item); // save pokemon list
+      state.pokemonListContent.push(itemContent); // save pokemon content
       state.loading = false; // Loading finished
     },
     [types.MUTATE_SET_PREV_PAGE]: (state: IStatePokemon, payload: string) => {

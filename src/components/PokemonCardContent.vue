@@ -4,7 +4,7 @@
     <router-link :to="{ name: 'pokemon', params: { pokemon: getPokemonName, id: getPokemonId }}">
       <img
         class="card-img-top"
-        :src="pokemon?.sprites.other.home.front_default"
+        :src="pokemon?.sprites.other.home?.front_default"
         :alt="getPokemonName">
     </router-link>
     <div class="card-body">

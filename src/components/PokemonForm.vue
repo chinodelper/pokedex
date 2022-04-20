@@ -8,7 +8,7 @@
           <input
             id="name"
             v-model="newPkemon.id"
-            type="text"
+            type="number"
             class="form-control"
             aria-describedby="id" />
         </div>
@@ -27,7 +27,7 @@
           <label for="image" class="form-label">Image URL</label>
           <input
             id="image"
-            v-model="newPkemon.image"
+            v-model="newPkemon.sprites"
             type="text"
             class="form-control"
             aria-describedby="name" />
@@ -52,7 +52,7 @@
             class="list-group-item">
             <input
               :id="type"
-              v-model="newPkemon.type"
+              v-model="newPkemon.types"
               class="form-check-input me-1"
               type="checkbox"
               :value="type">
@@ -95,8 +95,8 @@ export default defineComponent({
         id: undefined,
         name: '',
         description: '',
-        image: '',
-        type: [],
+        sprites: '',
+        types: [],
       },
     });
     const addNew = () => {
