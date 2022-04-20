@@ -22,6 +22,12 @@
   </nav>
   <div class="container">
     <div class="row">
+      <AlertMessage
+        v-for="error in getErrors"
+        v-show="getErrors.length > 0"
+        :errorTxt="error.label"
+        :key="error"
+      />
       <div class="text-center my-5" v-if="isLoading">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -42,9 +48,13 @@ import {
 import { useStore } from 'vuex';
 import * as types from '@/store/types';
 import POKEAPI from '@/api';
+import AlertMessage from '@/components/AlertMessage.vue';
 
 export default defineComponent({
   name: 'App',
+  components: {
+    AlertMessage,
+  },
   setup() {
     type Pokemon = {
       name: string,
@@ -85,6 +95,7 @@ export default defineComponent({
     });
     return {
       isLoading: computed(() => store.getters[types.GET_IS_LOADING]),
+      getErrors: computed(() => store.getters[types.GET_ERRORS]),
     };
   },
 });

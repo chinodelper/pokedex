@@ -79,7 +79,7 @@ export default defineComponent({
         store.dispatch(types.SET_ERRORS, errorLog);
       }
     };
-    const getFlavorTxt = (flavorListTxt:any[]) => flavorListTxt?.filter((flavor) => flavor.language.name === 'en')[0].flavor_text || '';
+    const getFlavorTxt = (flavorListTxt:any[]) => flavorListTxt?.filter((flavor) => flavor.language.name === 'en')[0].flavor_text || pokemon.description;
     onBeforeMount(() => {
       getSpecies();
     });

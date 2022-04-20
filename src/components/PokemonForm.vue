@@ -1,4 +1,5 @@
 <template>
+  <AlertMessage v-show="getErrors !== ''" :errorTxt="getErrors" />
   <form class="mt-5">
     <h3 class="mb-5">Write new data for a new Pokemon</h3>
     <div class="row">
@@ -9,7 +10,7 @@
           </span>
           <input
             id="name"
-            v-model="newPkemon.id"
+            v-model="newPokemon.id"
             type="number"
             class="form-control"
             aria-describedby="id" />
@@ -21,7 +22,7 @@
           </span>
           <input
             id="name"
-            v-model="newPkemon.name"
+            v-model="newPokemon.name"
             type="text"
             class="form-control"
             aria-describedby="name" />
@@ -35,7 +36,7 @@
               </span>
               <input
                 id="height"
-                v-model="newPkemon.height"
+                v-model="newPokemon.height"
                 type="text"
                 class="form-control"
                 aria-describedby="height" />
@@ -48,7 +49,7 @@
               </span>
               <input
                 id="height"
-                v-model="newPkemon.weight"
+                v-model="newPokemon.weight"
                 type="text"
                 class="form-control"
                 aria-describedby="weight" />
@@ -62,7 +63,7 @@
           </span>
           <input
             id="image"
-            v-model="newPkemon.sprites"
+            v-model="newPokemon.sprites"
             type="text"
             class="form-control"
             aria-describedby="name" />
@@ -74,7 +75,7 @@
           </span>
           <textarea
             id="description"
-            v-model="newPkemon.description"
+            v-model="newPokemon.description"
             class="form-control"
             aria-describedby="description" />
         </div>
@@ -88,7 +89,7 @@
             class="list-group-item">
             <input
               :id="type"
-              v-model="newPkemon.types"
+              v-model="newPokemon.types"
               class="form-check-input me-1"
               type="checkbox"
               :value="type">
@@ -112,12 +113,19 @@ import {
   reactive,
   toRefs,
 } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import AlertMessage from '@/components/AlertMessage.vue';
 import { useStore } from 'vuex';
 import * as types from '@/store/types';
 
 export default defineComponent({
   name: 'PokemonForm',
+  components: {
+    AlertMessage,
+  },
   setup() {
+    const router = useRouter();
+    const route = useRoute();
     const store = useStore();
     const typesList = [
       'grass',
@@ -127,18 +135,31 @@ export default defineComponent({
       'water',
     ];
     const state = reactive({
-      newPkemon: {
-        id: undefined,
+      getErrors: '',
+      newPokemon: {
+        id: null,
         name: '',
-        height: 0,
-        weight: 0,
+        height: null,
+        weight: null,
         description: '',
         sprites: '',
         types: [],
       },
     });
     const addNew = () => {
-      store.dispatch(types.SET_ADD_NEW_POKEMON, state.newPkemon);
+      state.getErrors = ''; // reset error flag
+      if (state.newPokemon.id !== '' && state.newPokemon.name !== '') {
+        store.dispatch(types.SET_START_LOADING); // Start loading
+        store.dispatch(types.SET_ADD_NEW_POKEMON, state.newPokemon);
+        router.push({
+          name: 'Home',
+          query: {
+            ...route.query,
+          },
+        });
+      } else {
+        state.getErrors = 'Complete empty fields, please.';
+      }
     };
     return {
       typesList,

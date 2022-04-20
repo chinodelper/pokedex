@@ -52,7 +52,7 @@ export default createStore({
     [types.GET_PREV_PAGE]: (state: IStatePokemon) => state.prevPage,
     [types.GET_NEXT_PAGE]: (state: IStatePokemon) => state.nextPage,
     [types.GET_IS_LOADING]: (state: IStatePokemon) => state.loading,
-    [types.GET_IS_LOADING]: (state: IStatePokemon) => state.loading,
+    [types.GET_ERRORS]: (state: IStatePokemon) => state.errors,
     [types.GET_POKEMON]: (state: IStatePokemon) => state.pokemonList,
     [types.GET_POKEMON_LIST_CONTENT]: (state: IStatePokemon) => state.pokemonListContent,
     [types.GET_POKEMON_SPECIES]: (state: IStatePokemon) => state.pokemonSpeciesContent,
@@ -61,7 +61,7 @@ export default createStore({
       (state: IStatePokemon) => (id: number) => {
         const idInt = Number(id);
         const item = state.pokemonListContent
-          .find((el) => el.id === idInt);
+          .find((el) => el?.id === idInt);
         return item;
       },
   },
@@ -76,7 +76,9 @@ export default createStore({
         name: string,
         sprites: string,
         description: string,
-        types: any
+        types: any,
+        height: number,
+        weight: number,
       }) => {
       const item = {
         name: payload.name,
@@ -96,6 +98,10 @@ export default createStore({
             },
           },
         },
+        name: payload.name,
+        height: payload.height,
+        weight: payload.weight,
+        description: payload.description,
       };
 
       // Set new data into current store

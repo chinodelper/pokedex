@@ -4,6 +4,7 @@ export const GET_POKEMON_LIST_CONTENT = 'pokemon/GET_POKEMON_LIST_CONTENT';
 export const GET_POKEMON_SPECIES = 'pokemon/GET_POKEMON_SPECIES';
 export const GET_IS_DATA_STORED = 'pokemon/GET_IS_DATA_STORED';
 export const GET_POKEMON_CONTENT = 'pokemon/GET_POKEMON_CONTENT';
+export const GET_ERRORS = 'pokemon/GET_ERRORS';
 export const SET_POKEMON = 'pokemon/SET_POKEMON';
 export const MUTATE_SET_POKEMON = 'pokemon/MUTATE_SET_POKEMON';
 export const SET_POKEMON_CONTENT = 'pokemon/SET_POKEMON_CONTENT';
