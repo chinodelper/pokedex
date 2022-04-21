@@ -42,3 +42,4 @@ For this reason, an alert will appear when the user enters the new pokemon descr
 - Jest
 - Vue Test Utils
 - SASS
+- Node.js v16.14.2
