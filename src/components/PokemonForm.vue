@@ -37,7 +37,7 @@
               <input
                 id="height"
                 v-model="newPokemon.height"
-                type="text"
+                type="number"
                 class="form-control"
                 aria-describedby="height" />
             </div>
@@ -50,7 +50,7 @@
               <input
                 id="height"
                 v-model="newPokemon.weight"
-                type="text"
+                type="number"
                 class="form-control"
                 aria-describedby="weight" />
             </div>
