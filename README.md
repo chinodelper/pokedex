@@ -33,11 +33,12 @@ The user can move back and forward from the bottom pagination buttons.
 ### Add new
 Since we are not using an actual backend, the app saves the new data into the Vuex store to retrieve
 the information from the local instance.
-For this reason, an alert will appear when the user enters the new pokemon added.
+For this reason, an alert will appear when the user enters the new pokemon description.
 
 # Technologies
 1. Vue 3
 2. Typescript
 3. Axios
-4. Jest / vue-utils
-5. SASS
+4. Jest
+5. Vue Test Utils
+6. SASS
