@@ -38,7 +38,9 @@ export default defineComponent({
   setup(props) {
     const store = useStore();
     const { url, name } = toRefs(props);
+    // Get the id of the pokemon from the url prop
     const getPokemonId = url.value?.split('/').slice(-2)[0] || 0;
+    // Retrieve the pokemon content from the store
     const pokemon = computed(() => store.getters[types.GET_POKEMON_CONTENT](getPokemonId));
     return {
       getPokemonName: name,

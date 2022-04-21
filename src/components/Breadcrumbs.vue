@@ -30,6 +30,7 @@ export default defineComponent({
     const store = useStore(); // inject vuex
     const route = useRoute();
     const router = useRouter();
+    // Return to the home page and clear the pokemon content in the store
     const goHome = () => {
       store.dispatch(types.SET_CLEAR_CONTENT);
       router.push({

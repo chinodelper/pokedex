@@ -40,6 +40,7 @@ export default defineComponent({
     const { baseContent } = toRefs(props);
     const axios: any = inject('$http'); // inject axios
     const store = useStore();
+    // Check if there is data in the current state
     const isDataStored = () => store.getters[types.GET_IS_DATA_STORED];
     // retreive the list of pokemons
     const getContent = async (): Promise<void> => {

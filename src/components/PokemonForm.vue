@@ -149,6 +149,7 @@ export default defineComponent({
         types: [],
       },
     });
+    // Save new pokemon into the store
     const addNew = () => {
       state.getError = ''; // reset error flag
       state.showError = false;

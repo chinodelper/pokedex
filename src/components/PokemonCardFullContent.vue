@@ -60,6 +60,7 @@ export default defineComponent({
       previous: string;
       results: [];
     }
+    // Retrieve the species content of each pokemon
     const getSpecies = async (): Promise<void> => {
       try {
         await axios
@@ -79,6 +80,9 @@ export default defineComponent({
         store.dispatch(types.SET_ERRORS, errorLog);
       }
     };
+    /**
+     * @param {array} flavorListTxt array of flavor texts
+     */
     const getFlavorTxt = (flavorListTxt:any[]) => flavorListTxt?.filter((flavor) => flavor.language.name === 'en')[0].flavor_text || pokemon.description;
     onBeforeMount(() => {
       getSpecies();

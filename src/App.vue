@@ -81,6 +81,7 @@ export default defineComponent({
     const store = useStore(); // inject vuex
     const route = useRoute();
     const router = useRouter();
+    // retrieve the list of pokemons to the Home page
     const getList = async (): Promise<void> => {
       store.dispatch(types.SET_START_LOADING); // Start loading
       try {
@@ -103,6 +104,7 @@ export default defineComponent({
         store.dispatch(types.SET_ERRORS, errorLog);
       }
     };
+    // return to the home page
     const goHome = () => {
       store.dispatch(types.SET_CLEAR_CONTENT);
       router.push({

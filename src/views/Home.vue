@@ -46,6 +46,9 @@ export default defineComponent({
     const axios: any = inject('$http'); // inject axios
     const prevUrl = store.getters[types.GET_PREV_PAGE];
     const nextUrl = store.getters[types.GET_NEXT_PAGE];
+    /**
+     * @param {string} url url to make the axios call
+     */
     const updateList = async (url: string): Promise<void> => {
       store.dispatch(types.SET_START_LOADING); // Start loading
       try {
