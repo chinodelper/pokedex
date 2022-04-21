@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/extensions
-import PokemonForm from '@/components/PokemonForm';
+import PokemonForm from '@/components/PokemonForm.vue';
 import { mount } from '@vue/test-utils';
 
 describe('PokemonForm', () => {

@@ -1,5 +1,4 @@
 <template>
-  <Breadcrumbs item="New" />
   <div id="alertMessage" v-show="showError">
     <AlertMessage :errorTxt="getError" />
   </div>
@@ -11,7 +10,7 @@
             <label for="id">Id</label>
           </span>
           <input
-            id="name"
+            id="id"
             v-model="newPokemon.id"
             type="number"
             class="form-control"
@@ -118,7 +117,6 @@ import {
 } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import AlertMessage from '@/components/AlertMessage.vue';
-import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { useStore } from 'vuex';
 import * as types from '@/store/types';
 
@@ -126,7 +124,6 @@ export default defineComponent({
   name: 'PokemonForm',
   components: {
     AlertMessage,
-    Breadcrumbs,
   },
   setup() {
     const router = useRouter();
@@ -155,6 +152,7 @@ export default defineComponent({
     const addNew = () => {
       state.getError = ''; // reset error flag
       state.showError = false;
+      // check input values to call actions
       if (state.newPokemon.id !== '' && state.newPokemon.name !== '') {
         store.dispatch(types.SET_START_LOADING); // Start loading
         store.dispatch(types.SET_ADD_NEW_POKEMON, state.newPokemon);

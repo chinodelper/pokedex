@@ -1,4 +1,5 @@
 <template>
+  <Breadcrumbs item="New" />
   <PokemonForm />
 </template>
 
@@ -6,18 +7,14 @@
 import {
   defineComponent,
 } from 'vue';
+import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import PokemonForm from '@/components/PokemonForm.vue';
 
 export default defineComponent({
   name: 'AddNew',
   components: {
     PokemonForm,
-  },
-  props: {
-    newPokemon: {
-      type: Object,
-      default: () => ({}),
-    },
+    Breadcrumbs,
   },
 });
 </script>

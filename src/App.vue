@@ -1,5 +1,5 @@
 <template>
-  <nav v-if="!isLoading" class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav id="navbar" v-if="!isLoading" class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Pokédex</a>
       <button class="navbar-toggler"
@@ -11,10 +11,17 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a href="#" class="nav-link" aria-current="page" @click.prevent="goHome">Home</a>
+            <a
+              id="go-home"
+              href="#"
+              class="nav-link"
+              aria-current="page"
+              @click.prevent="goHome">
+                Home
+            </a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/addNew">New</router-link>
+            <router-link id="addNewLink" class="nav-link" to="/addNew">New</router-link>
           </li>
         </ul>
       </div>
@@ -22,12 +29,15 @@
   </nav>
   <div class="container">
     <div class="row">
-      <AlertMessage
-        v-for="error in getErrors"
-        v-show="getErrors.length > 0"
-        :errorTxt="error.label"
-        :key="error"
-      />
+      <div
+        id="get-errors"
+        v-show="getErrors?.length > 0">
+        <AlertMessage
+          v-for="error in getErrors"
+          :errorTxt="error.label"
+          :key="error"
+        />
+      </div>
       <div class="text-center my-5" v-if="isLoading">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>

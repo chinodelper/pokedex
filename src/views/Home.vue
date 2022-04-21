@@ -7,10 +7,10 @@
   <nav aria-label="Page navigation example" class="my-5">
     <ul class="pagination justify-content-center pagination-lg">
       <li :class="{ 'disabled' :  prevUrl === null }" class="page-item">
-        <a class="page-link" href="#" @click.stop.prevent="prev">Previous</a>
+        <a id="prev" class="page-link" href="#" @click.stop.prevent="prev">Previous</a>
       </li>
       <li :class="{ 'disabled' :  nextUrl === null }" class="page-item">
-        <a class="page-link" href="#" @click.stop.prevent="next">Next</a>
+        <a id="next" class="page-link" href="#" @click.stop.prevent="next">Next</a>
       </li>
     </ul>
   </nav>
