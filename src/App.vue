@@ -11,7 +11,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" to="/addNew">Add New</router-link>
+            <a href="#" class="nav-link" aria-current="page" @click.prevent="goHome">Home</a>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/addNew">New</router-link>
           </li>
         </ul>
       </div>
@@ -43,6 +46,7 @@ import {
   computed,
 } from 'vue';
 import { useStore } from 'vuex';
+import { useRoute, useRouter } from 'vue-router';
 import * as types from '@/store/types';
 import POKEAPI from '@/api';
 import AlertMessage from '@/components/AlertMessage.vue';
@@ -65,7 +69,10 @@ export default defineComponent({
     }
     const axios: any = inject('$http'); // inject axios
     const store = useStore(); // inject vuex
+    const route = useRoute();
+    const router = useRouter();
     const getList = async (): Promise<void> => {
+      store.dispatch(types.SET_START_LOADING); // Start loading
       try {
         await axios
           .get(POKEAPI.getAll)
@@ -86,13 +93,22 @@ export default defineComponent({
         store.dispatch(types.SET_ERRORS, errorLog);
       }
     };
+    const goHome = () => {
+      store.dispatch(types.SET_CLEAR_CONTENT);
+      router.push({
+        name: 'Home',
+        query: {
+          ...route.query,
+        },
+      });
+    };
     onBeforeMount(() => {
-      store.dispatch(types.SET_START_LOADING); // Start loading
       getList();
     });
     return {
       isLoading: computed(() => store.getters[types.GET_IS_LOADING]),
       getErrors: computed(() => store.getters[types.GET_ERRORS]),
+      goHome,
     };
   },
 });

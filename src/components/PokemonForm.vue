@@ -1,7 +1,7 @@
 <template>
-  <AlertMessage v-show="getErrors !== ''" :errorTxt="getErrors" />
+  <Breadcrumbs item="New" />
+  <AlertMessage v-show="showError" :errorTxt="getError" />
   <form class="mt-5">
-    <h3 class="mb-5">Write new data for a new Pokemon</h3>
     <div class="row">
       <div class="col">
         <div class="input-group mb-3">
@@ -115,6 +115,7 @@ import {
 } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import AlertMessage from '@/components/AlertMessage.vue';
+import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { useStore } from 'vuex';
 import * as types from '@/store/types';
 
@@ -122,6 +123,7 @@ export default defineComponent({
   name: 'PokemonForm',
   components: {
     AlertMessage,
+    Breadcrumbs,
   },
   setup() {
     const router = useRouter();
@@ -135,7 +137,8 @@ export default defineComponent({
       'water',
     ];
     const state = reactive({
-      getErrors: '',
+      getError: '',
+      showError: false,
       newPokemon: {
         id: null,
         name: '',
@@ -147,7 +150,8 @@ export default defineComponent({
       },
     });
     const addNew = () => {
-      state.getErrors = ''; // reset error flag
+      state.getError = ''; // reset error flag
+      state.showError = false;
       if (state.newPokemon.id !== '' && state.newPokemon.name !== '') {
         store.dispatch(types.SET_START_LOADING); // Start loading
         store.dispatch(types.SET_ADD_NEW_POKEMON, state.newPokemon);
@@ -158,7 +162,8 @@ export default defineComponent({
           },
         });
       } else {
-        state.getErrors = 'Complete empty fields, please.';
+        state.getError = 'Complete empty fields, please.';
+        state.showError = true;
       }
     };
     return {

@@ -141,7 +141,7 @@ export default createStore({
   },
   actions: {
     [types.SET_ADD_NEW_POKEMON]: ({ commit }:
-      { commit: Commit, state: IStatePokemon }, payload: []) => {
+      { commit: Commit }, payload: []) => {
       commit(types.MUTATE_SET_ADD_NEW_POKEMON, payload);
       commit(types.MUTATE_SET_CLEAR_CONTENT);
     },
@@ -154,7 +154,7 @@ export default createStore({
       commit(types.MUTATE_SET_POKEMON_CONTENT, payload);
     },
     [types.SET_POKEMON_SPECIES]: ({ commit }:
-      { commit: Commit, state: IStatePokemon }, payload: []) => {
+      { commit: Commit }, payload: []) => {
       commit(types.MUTATE_SET_POKEMON_SPECIES, payload);
     },
     [types.SET_NEXT_PAGE]: ({ commit, state }:
