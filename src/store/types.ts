@@ -13,6 +13,8 @@ export const SET_POKEMON_SPECIES = 'pokemon/SET_POKEMON_SPECIES';
 export const MUTATE_SET_POKEMON_SPECIES = 'pokemon/MUTATE_SET_POKEMON_SPECIES';
 export const SET_ADD_NEW_POKEMON = 'pokemon/SET_ADD_NEW_POKEMON';
 export const MUTATE_SET_ADD_NEW_POKEMON = 'pokemon/MUTATE_SET_ADD_NEW_POKEMON';
+export const SET_CLEAR_CONTENT = 'pokemon/SET_CLEAR_CONTENT';
+export const MUTATE_SET_CLEAR_CONTENT = 'pokemon/MUTATE_SET_CLEAR_CONTENT';
 
 // Pagination types
 export const SET_PREV_PAGE = 'pagination/SET_PREV_PAGE';

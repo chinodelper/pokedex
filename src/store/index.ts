@@ -129,6 +129,9 @@ export default createStore({
     [types.MUTATE_SET_START_LOADING]: (state: IStatePokemon) => {
       state.loading = true; // Loading finished
     },
+    [types.MUTATE_SET_CLEAR_CONTENT]: (state: IStatePokemon) => {
+      state.pokemonSpeciesContent = []; // clear species content
+    },
     [types.MUTATE_SET_ERRORS]: (state:IErrors, payload:ErrorLog) => {
       state.errors.push(payload);
       const error = payload.error || ' - [HTTP error not specified]';
@@ -140,6 +143,7 @@ export default createStore({
     [types.SET_ADD_NEW_POKEMON]: ({ commit }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
       commit(types.MUTATE_SET_ADD_NEW_POKEMON, payload);
+      commit(types.MUTATE_SET_CLEAR_CONTENT);
     },
     [types.SET_POKEMON]: ({ commit }:
       { commit: Commit, state: IStatePokemon }, payload: []) => {
@@ -166,6 +170,10 @@ export default createStore({
     [types.SET_START_LOADING]: ({ commit }:
       { commit: Commit }) => {
       commit(types.MUTATE_SET_START_LOADING);
+    },
+    [types.SET_CLEAR_CONTENT]: ({ commit }:
+      { commit: Commit }) => {
+      commit(types.MUTATE_SET_CLEAR_CONTENT);
     },
     [types.SET_ERRORS]: async (
       { commit }:{ commit: Commit },
