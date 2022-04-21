@@ -1,6 +1,8 @@
 <template>
   <Breadcrumbs item="New" />
-  <AlertMessage v-show="showError" :errorTxt="getError" />
+  <div id="alertMessage" v-show="showError">
+    <AlertMessage :errorTxt="getError" />
+  </div>
   <form class="mt-5">
     <div class="row">
       <div class="col">
@@ -99,6 +101,7 @@
       </div>
     </div>
     <button
+      id="submit"
       type="submit"
       class="btn btn-primary mt-5"
       @click.prevent="addNew">
