@@ -25,5 +25,9 @@ npm run test:unit
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Add new pokemon feature
+```
+Since we are not using an actual backend, the app saves the new data into the Vuex store to retrieve the information from the local instance.
+
+For this reason, an alert will appear when the user enters the new pokemon added.
+```
