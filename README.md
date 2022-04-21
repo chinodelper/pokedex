@@ -36,9 +36,9 @@ the information from the local instance.
 For this reason, an alert will appear when the user enters the new pokemon description.
 
 # Technologies
-1. Vue 3
-2. Typescript
-3. Axios
-4. Jest
-5. Vue Test Utils
-6. SASS
+- Vue 3
+- Typescript
+- Axios
+- Jest
+- Vue Test Utils
+- SASS
