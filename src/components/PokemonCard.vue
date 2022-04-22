@@ -2,8 +2,8 @@
   <div class="col-lg-3 col-sm-6 col-xs-12 my-3">
     <div class="card shadow-sm h-100">
       <PokemonCardContent
-        :url="baseContent.url"
-        :name="baseContent.name"
+        :url="baseContent?.url"
+        :name="baseContent?.name"
       />
     </div>
   </div>

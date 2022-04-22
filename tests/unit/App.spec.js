@@ -1,15 +1,19 @@
 import App from '@/App.vue';
 import { mount } from '@vue/test-utils';
 import { createStore } from 'vuex';
-import * as types from '@/store/types';
 
 describe('App', () => {
+  const name = 'bulbasaur';
+  const url = 'https://pokeapi.co/api/v2/pokemon/1/';
   let store;
 
   beforeEach(() => {
     store = createStore({
       state: {
-        pokemonList: [],
+        pokemonList: [{
+          name,
+          url,
+        }],
       },
     });
   });
