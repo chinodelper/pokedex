@@ -5,8 +5,23 @@ export type Pokemon = {
 
 export type PokemonContent = {
   id: number,
-  types: any,
-  sprites: any
+  types: {
+    type: {
+      name: string,
+    },
+  }[],
+  sprites: {
+    other: {
+      home: {
+        // eslint-disable-next-line camelcase
+        front_default: string,
+      },
+    },
+  },
+  name?: string,
+  height?: number,
+  weight?: number,
+  description?: string,
 }
 
 export type PokemonSpeciesContent = {
@@ -14,12 +29,12 @@ export type PokemonSpeciesContent = {
 }
 
 export interface IStatePokemon {
-  pokemonList: storetypes.Pokemon[],
-  pokemonListContent: storetypes.PokemonContent[],
+  pokemonList: Pokemon[],
+  pokemonListContent: PokemonContent[],
   pokemonSpeciesContent: PokemonSpeciesContent[],
   nextPage: string,
   prevPage: string,
-  errors: Array<string>,
+  errors: string[],
   loading: null | boolean
 }
 

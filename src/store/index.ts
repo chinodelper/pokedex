@@ -1,5 +1,5 @@
 import { createStore, Commit } from 'vuex';
-import * as storetypes from '../types/store.d';
+import * as storetypes from '@/types/store.d';
 import * as types from './types';
 
 export default createStore({
@@ -45,24 +45,30 @@ export default createStore({
         height: number,
         weight: number,
       }) => {
+      // build item structure
       const item = {
         name: payload.name,
         url: `https://pokeapi.co/api/v2/pokemon/${payload.id}/`,
       };
 
-      // Build the new structure to add payload
+      // build type structure
       const itemTypes: any = [];
       payload.types.forEach((element: string) => itemTypes.push({ type: { name: element } }));
-      const itemContent = {
-        id: payload.id,
-        types: itemTypes,
-        sprites: {
-          other: {
-            home: {
-              front_default: payload.sprites,
-            },
+
+      // build sprite structure
+      const sprite = {
+        other: {
+          home: {
+            front_default: payload.sprites,
           },
         },
+      };
+
+      // Create itemContent to push to the state
+      const itemContent: storetypes.PokemonContent = {
+        id: payload.id,
+        types: itemTypes,
+        sprites: sprite,
         name: payload.name,
         height: payload.height,
         weight: payload.weight,

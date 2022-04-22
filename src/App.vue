@@ -21,7 +21,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <router-link id="addNewLink" class="nav-link" to="/addNew">New</router-link>
+            <router-link id="addNewLink" class="nav-link" to="/new">New</router-link>
           </li>
         </ul>
       </div>
